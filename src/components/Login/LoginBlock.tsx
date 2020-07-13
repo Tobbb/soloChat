@@ -1,8 +1,11 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import styled from "styled-components";
 import { LoginText } from "./parts/LoginText";
 import { NameInput } from "./parts/NameInput";
 import { LoginButton } from "./parts/LoginButton";
+import { connect } from "react-redux";
+import { UserInfoActions } from "../../reducers/userInfo/action/type";
+import { SetUserName } from "../../reducers/userInfo/action/action";
 
 const LoginBlockContaiener= styled.div`
 background-color: ${props => props.theme.loginFG};
@@ -28,15 +31,30 @@ box-shadow: 2px 3px 25px -5px rgba(0,0,0,0.75);
 
 `;
 
-export const LoginBlock = () => {
-    const [username, setUsername] = React.useState<string>("");
+type LoginContainerProps = {
+    onLogin: (name:string) => void;
+}
 
+
+const LoginContainer = (props:LoginContainerProps ) => {
+    const [username, setUsername] = React.useState<string>("");
+    const handleLogin = () => {
+        if(username.length>0){
+            props.onLogin(username);
+        }
+    }
     return (
         <LoginBlockContaiener>
             <LoginText isHeadline={true}>SoloChat</LoginText>
             <LoginText isHeadline={false}>Chat with the coolest cat in town!</LoginText>
             <NameInput onChange={(e)=> setUsername(e.target.value)}/>
-            <LoginButton disabled={username.length===0}>Login</LoginButton>
+            <LoginButton disabled={username.length===0} onClick={handleLogin}>Login</LoginButton>
         </LoginBlockContaiener>
     )
 }
+
+const mapDispatchToProps = (dispatch: Dispatch<UserInfoActions>) => ({
+    onLogin: (name:string)=>dispatch(SetUserName(name))
+})
+
+export const LoginBlock = connect(undefined,mapDispatchToProps)(LoginContainer)
