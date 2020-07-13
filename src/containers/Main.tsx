@@ -24,7 +24,7 @@ export const MainContainer = (props: MainProps) => {
            {props.loggedIn?
            <ChatContainer/>
            :
-           <ChatContainer/>
+           <Login/>
            }
            
         </PageContainer>
