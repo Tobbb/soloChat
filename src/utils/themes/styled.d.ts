@@ -4,6 +4,9 @@ declare module 'styled-components' {
         loginBG:string;
         loginFG: string;
         textLight:string;
+        chatFG: string;
+        chatMessages: string;
+        chatMessagesBorder:string;
         breakpoints:{
             mobile: string;
             tablet: string;

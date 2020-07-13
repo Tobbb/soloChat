@@ -4,6 +4,7 @@ import { Header } from "./Header/Header";
 import { Login } from "./Login/Login";
 import { connect } from "react-redux";
 import { stateTypes } from "../reducers/rootReducer";
+import { ChatContainer } from "./Chat/Chat";
 
 const PageContainer = styled.div`
 display:grid;
@@ -21,9 +22,9 @@ export const MainContainer = (props: MainProps) => {
         <PageContainer>
            <Header/>
            {props.loggedIn?
-           <div>sa</div>
+           <ChatContainer/>
            :
-           <Login/>
+           <ChatContainer/>
            }
            
         </PageContainer>

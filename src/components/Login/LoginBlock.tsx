@@ -47,7 +47,7 @@ const LoginContainer = (props:LoginContainerProps ) => {
         <LoginBlockContaiener>
             <LoginText isHeadline={true}>SoloChat</LoginText>
             <LoginText isHeadline={false}>Chat with the coolest cat in town!</LoginText>
-            <NameInput onChange={(e)=> setUsername(e.target.value)}/>
+            <NameInput placeholder="Whats your name?"  onChange={(e)=> setUsername(e.target.value)}/>
             <LoginButton disabled={username.length===0} onClick={handleLogin}>Login</LoginButton>
         </LoginBlockContaiener>
     )
