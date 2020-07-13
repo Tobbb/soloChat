@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Header } from "./Header/Header";
+import { Login } from "./Login/Login";
 
 const PageContainer = styled.div`
 display:grid;
@@ -11,8 +13,8 @@ export const MainContainer = () => {
 
     return(
         <PageContainer>
-           <div>1</div>
-           <div>2</div>
+           <Header/>
+           <Login/>
         </PageContainer>
     )
 }
