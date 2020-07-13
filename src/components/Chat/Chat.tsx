@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { ChatInputGroup } from "./Insert/InputField";
-import { DisplayContainer } from "./Display/ChatDisplay";
+import { ChatInputControl } from "./Insert/InputField";
+import { ChatDisplay } from "./Display/ChatDisplay";
 
 const ChatWindowContainer= styled.div`
 background-color: ${props => props.theme.chatFG};
@@ -32,8 +32,8 @@ justify-self:center;
 export const ChatWindow= () => {
     return(
 <ChatWindowContainer>
-        <DisplayContainer/>
-        <ChatInputGroup/>
+        <ChatDisplay/>
+        <ChatInputControl/>
 </ChatWindowContainer>
     )
 }

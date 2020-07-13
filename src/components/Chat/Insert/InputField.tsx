@@ -1,5 +1,9 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { MessageStackActions, MessageType } from "../../../reducers/MessageStack/action/type";
+import { AddMessageToStack } from "../../../reducers/MessageStack/action/action";
+import { stateTypes } from "../../../reducers/rootReducer";
 
 export const ChatInput= styled.textarea`
 resize:none;
@@ -18,17 +22,41 @@ display:grid;
 grid-template-columns: 5fr 1fr;
 `;
 
-export const ChatInputGroup = () => {
+type ChatInputProps = {
+    onSubmitMessage: (message: MessageType ) => void;
+    name: string;
+}
+
+
+export const ChatInputGroup = (props: ChatInputProps) => {
 const [message, setMessage] = React.useState<string>("");
+const handleSubmit = () => {
+    if(message.length>0){
+        const dispatchMessage: MessageType = {
+            time:new Date(),
+            message:message,
+            sender: props.name
+        }
+        props.onSubmitMessage(dispatchMessage);
+        setMessage("");
+    }
+}
 return(
     <InputContainer>        
     <ChatInput onChange={(e) => setMessage(e.target.value)} placeholder={"Type your message"} value={message}/>
 
-        <ChatButton>
+        <ChatButton onClick={handleSubmit} disabled={message.length===0}>
             Send
         </ChatButton>
     </InputContainer>
 )
 }
+const mapStateToProps = ({userInfo}:stateTypes) => ({
+    name: userInfo.name
+})
 
+const mapDispatchToProps = (dispatch: Dispatch<MessageStackActions>) => ({
+    onSubmitMessage: (message: MessageType )=> dispatch(AddMessageToStack(message))
+});
+export const ChatInputControl = connect(mapStateToProps,mapDispatchToProps)(ChatInputGroup);
 
